@@ -42,7 +42,7 @@ model = keras.Sequential([
 	layers.BatchNormalization(),	
 
 	layers.Dense(units=1024, activation='relu'),
-	layers.Drop(0.3),
+	layers.Dropout(0.3),
 	layers.BatchNormalization(),	
 
 	layers.Dense(units=output_shape),
