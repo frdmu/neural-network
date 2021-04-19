@@ -99,15 +99,15 @@ def randomForestRegressor(X_train, y_train, X_valid, y_valid):
     y_valid_predict=model.predict(X_valid)
     #展示在测试集上的表现 
     drawSO2=pd.concat([pd.DataFrame(y_valid[:, 0]),pd.DataFrame(y_valid_predict[:, 0])],axis=1);
-    draw.iloc[:,0].plot(figsize=(12,6))
-    draw.iloc[:,1].plot(figsize=(12,6))
+    drawSO2.iloc[:,0].plot(figsize=(12,6))
+    drawSO2.iloc[:,1].plot(figsize=(12,6))
     plt.legend(('realS02', 'predictSO2'),loc='upper right',fontsize='15')
     plt.title("Valid Data SO2",fontsize='30') #添加标 
 
 
     drawNOx=pd.concat([pd.DataFrame(y_valid[:, 1]),pd.DataFrame(y_valid_predict[:, 1])],axis=1);
-    draw.iloc[:,0].plot(figsize=(12,6))
-    draw.iloc[:,1].plot(figsize=(12,6))
+    drawNOx.iloc[:,0].plot(figsize=(12,6))
+    drawNOx.iloc[:,1].plot(figsize=(12,6))
     plt.legend(('realN0x', 'predictNOx'),loc='upper right',fontsize='15')
     plt.title("Valid Data NOx",fontsize='30') #添加标 
 if __name__ == '__main__':
