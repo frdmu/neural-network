@@ -12,7 +12,7 @@ def loadDataSet(fileName):
     #显示前几行数据
     display(df.head())
     #因为时间列不作为输入，所以去掉时间列
-    df.drop('时间', axis=1)
+    df = df.drop('时间', axis=1)
     #找到每一列的最大值和最小值，以便将数据全部转换为0-1之间的数字
     max_ = df.max(axis=0)
     min_ = df.min(axis=0)
