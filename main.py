@@ -6,7 +6,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from IPython.display import display
 from sklearn.metrics import mean_absolute_error
-from sklearn.metrics import mean_squared_erro
+from sklearn.metrics import mean_squared_error
 ##################数据处理#####################
 def loadDataSet(fileName): 
     # 读取数据
@@ -116,10 +116,10 @@ def randomForestRegressor(X_train, y_train, X_valid, y_valid):
     
     print('训练集上的MAE/MSE')
     print(mean_absolute_error(y_train_predict, y_train))
-    print(mean_squared_error(y_train_predict, y_train) )
+    print(mean_squared_error(y_train_predict, y_train))
     print('验证集上的MAE/MSE')
-    print(mean_absolute_error(y_test_predict, y_valid))
-    print(mean_squared_error(y_test_predict, y_valid) 
+    print(mean_absolute_error(y_valid_predict, y_valid))
+    print(mean_squared_error(y_valid_predict, y_valid)) 
 if __name__ == '__main__':
     X_train, X_valid, y_train, y_valid = loadDataSet('总数据整理.xls')
     neuralNetwork(X_train, y_train, X_valid, y_valid)
