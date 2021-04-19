@@ -17,7 +17,7 @@ def loadDataSet(fileName):
     max_ = df.max(axis=0)
     min_ = df.min(axis=0)
     #归一化
-    df = (df / min_) / (max_ - min_)
+    df = (df - min_) / (max_ - min_)
     #划分训练集和验证集，其中训练集占总数据的70%，验证集占总数据的30%
     df_train = df.sample(frac=0.7, random_state=0)
     df_valid = df.drop(df_train.index)
