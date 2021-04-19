@@ -11,19 +11,17 @@ def loadDataSet(fileName):
     df = pd.read_excel(fileName)
     #显示前几行数据
     display(df.head())
+    #因为时间列不作为输入，所以去掉时间列
+    df.drop('时间', axis=1)
     #找到每一列的最大值和最小值，以便将数据全部转换为0-1之间的数字
     max_ = df.max(axis=0)
     min_ = df.min(axis=0)
+    #归一化
+    df = (df / min_) / (max_ - min_)
     #划分训练集和验证集，其中训练集占总数据的70%，验证集占总数据的30%
     df_train = df.sample(frac=0.7, random_state=0)
     df_valid = df.drop(df_train.index)
-    #因为时间列不作为输入，所以去掉时间列
-    df_train = df_train.drop('时间', axis=1)
-    df_valid = df_valid.drop('时间', axis=1)
-    #归一化
-    df_train = (df_train - min_) / (max_ - min_)
-    df_valid = (df_valid - min_) / (max_ - min_)
-    #X_train 为训练集的输入，X_valid 为验证集的输入，y_train为训练集的输入， y_valid为验证集的输出
+    #X_train 为训练集的输入，X_valid 为验证集的输入，y_train为训练集的输出， y_valid为验证集的输出
     X_train = np.array(df_train.drop(columns=['SO2原始浓度\t(mg/m3)','NOx原始浓度(mg/m3)'], axis=1))
     X_valid = np.array(df_valid.drop(columns=['SO2原始浓度\t(mg/m3)','NOx原始浓度(mg/m3)'], axis=1))
     y_train = np.array(df_train[['SO2原始浓度\t(mg/m3)','NOx原始浓度(mg/m3)']])
