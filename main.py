@@ -120,7 +120,7 @@ def randomForestRegressor(X_train, y_train, X_valid, y_valid):
     print('验证集上的MAE/MSE')
     print(mean_absolute_error(y_test_predict, y_valid))
     print(mean_squared_error(y_test_predict, y_valid) 
-    if __name__ == '__main__':
+if __name__ == '__main__':
     X_train, X_valid, y_train, y_valid = loadDataSet('总数据整理.xls')
     neuralNetwork(X_train, y_train, X_valid, y_valid)
     randomForestRegressor(X_train, y_train, X_valid, y_valid)
