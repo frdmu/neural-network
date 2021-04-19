@@ -82,13 +82,14 @@ def randomForestRegressor(X_train, y_train, X_valid, y_valid):
     #在训练集上的拟合结果
     y_train_predict=model.predict(X_train)
     #展示在训练集上的表现
+    plt.figure(1)
     drawSO2=pd.concat([pd.DataFrame(y_train[:, 0]),pd.DataFrame(y_train_predict[:, 0])],axis=1)
     drawSO2.iloc[:,0].plot(figsize=(12,6))
     drawSO2.iloc[:,1].plot(figsize=(12,6))
     plt.legend(('realSO2', 'predictSO2'),fontsize='15')
     plt.title("Train Data SO2 ",fontsize='30') #添加标题
 
-
+    plt.figure(2)
     drawNOx=pd.concat([pd.DataFrame(y_train[:, 1]),pd.DataFrame(y_train_predict[:, 1])],axis=1)
     drawNOx.iloc[:,0].plot(figsize=(12,6))
     drawNOx.iloc[:,1].plot(figsize=(12,6))
@@ -98,13 +99,14 @@ def randomForestRegressor(X_train, y_train, X_valid, y_valid):
     #在测试集上的预测
     y_valid_predict=model.predict(X_valid)
     #展示在测试集上的表现 
+    plt.figure(3) 
     drawSO2=pd.concat([pd.DataFrame(y_valid[:, 0]),pd.DataFrame(y_valid_predict[:, 0])],axis=1);
     drawSO2.iloc[:,0].plot(figsize=(12,6))
     drawSO2.iloc[:,1].plot(figsize=(12,6))
     plt.legend(('realS02', 'predictSO2'),loc='upper right',fontsize='15')
     plt.title("Valid Data SO2",fontsize='30') #添加标 
 
-
+    plt.figure(4)
     drawNOx=pd.concat([pd.DataFrame(y_valid[:, 1]),pd.DataFrame(y_valid_predict[:, 1])],axis=1);
     drawNOx.iloc[:,0].plot(figsize=(12,6))
     drawNOx.iloc[:,1].plot(figsize=(12,6))
