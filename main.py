@@ -3,6 +3,7 @@ from tensorflow.keras import layers
 from sklearn.ensemble import RandomForestRegressor
 import pandas as pd
 import numpy as np
+import matplotlib.pyplot as plt
 from IPython.display import display
 
 ##################数据处理#####################
@@ -93,7 +94,22 @@ def randomForestRegressor(X_train, y_train, X_valid, y_valid):
     drawNOx.iloc[:,1].plot(figsize=(12,6))
     plt.legend(('realNOx', 'predictNOx'),fontsize='15')
     plt.title("Train Data NOx ",fontsize='30') #添加标题
+ 
+    #在测试集上的预测
+    y_valid_predict=model.predict(X_valid)
+    #展示在测试集上的表现 
+    drawSO2=pd.concat([pd.DataFrame(y_valid[:, 0]),pd.DataFrame(y_valid_predict[:, 0])],axis=1);
+    draw.iloc[:,0].plot(figsize=(12,6))
+    draw.iloc[:,1].plot(figsize=(12,6))
+    plt.legend(('realS02', 'predictSO2'),loc='upper right',fontsize='15')
+    plt.title("Valid Data SO2",fontsize='30') #添加标 
 
+
+    drawNOx=pd.concat([pd.DataFrame(y_valid[:, 1]),pd.DataFrame(y_valid_predict[:, 1])],axis=1);
+    draw.iloc[:,0].plot(figsize=(12,6))
+    draw.iloc[:,1].plot(figsize=(12,6))
+    plt.legend(('realN0x', 'predictNOx'),loc='upper right',fontsize='15')
+    plt.title("Valid Data NOx",fontsize='30') #添加标 
 if __name__ == '__main__':
     X_train, X_valid, y_train, y_valid = loadDataSet('总数据整理.xls')
     neuralNetwork(X_train, y_train, X_valid, y_valid)
