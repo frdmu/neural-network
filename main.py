@@ -97,6 +97,6 @@ def randomForestRegressor(X_train, y_train, X_valid, y_valid):
     plt.title("Train Data NOx ",fontsize='30') #添加标题
 
 if __name__ == '__main__':
-    X_train, y_train, X_valid, y_valid = loadDataSet("总数据整理.xls")
+    X_train, y_train, X_valid, y_valid = loadDataSet('总数据整理.xls')
     neuralNetwork(X_train, y_train, X_valid, y_valid)
     randomForestRegressor(X_train, y_train, X_valid, y_valid)
