@@ -7,6 +7,12 @@ import matplotlib.pyplot as plt
 from IPython.display import display
 from sklearn.metrics import mean_absolute_error
 from sklearn.metrics import mean_squared_error
+
+from sklearn.metrics import r2_score
+#from sklearn.model_selection import GridSearchCV
+#from sklearn.model_selection import LeaveOneOut, KFold
+
+from LSSVMRegression import LSSVMRegression
 ##################数据处理#####################
 def loadDataSet(fileName): 
     # 读取数据
@@ -120,7 +126,43 @@ def randomForestRegressor(X_train, y_train, X_valid, y_valid):
     print('验证集上的MAE/MSE')
     print(mean_absolute_error(y_valid_predict, y_valid))
     print(mean_squared_error(y_valid_predict, y_valid)) 
+################III.LSSVM#######################
+    #建立模型并训练模型
+def LSSVMRegressor(X_train, y_train, X_valid, y_valid): 
+		#rbf-model
+	clfrbf=LSSVMRegression(
+        gamma=1,       #set the gamma-hyper parameter equal to 1
+        kernel='poly', #use the linear kernel
+        sigma=1.0,
+        c=1.0,
+        d=3,
+            )
+	x = X_train
+	y_0 = y_train[:,0] # SO2
+	y_1 = y_train[:,1] # NOx
+	# train model and predict for SO2
+	clfrbf.fit(x, y_0)
+	xPred=X_valid
+	yExact=y_valid[:, 0]
+	yPred=clfrbf.predict(xPred)
+	# The mean squared error
+	print('Mean squared error: %.6f' % mean_squared_error(yExact, yPred))
+	# The coefficient of determination: 1 is perfect prediction
+	print('Coefficient of determination: %.6f' % r2_score(yExact, yPred))
+	
+	# train model and predict for NOx
+	clfrbf.fit(x, y_1)
+	yExact=y_valid[:, 1]
+	yPred=clfrbf.predict(xPred)
+	# The mean squared error
+	print('Mean squared error: %.6f' % mean_squared_error(yExact, yPred))
+	# The coefficient of determination: 1 is perfect prediction
+	print('Coefficient of determination: %.6f' % r2_score(yExact, yPred))
+
+# The mean squared error
+print('Mean squared error: %.6f' % mean_squared_error(yExact, yPred)
 if __name__ == '__main__':
     X_train, X_valid, y_train, y_valid = loadDataSet('总数据整理.xls')
-    neuralNetwork(X_train, y_train, X_valid, y_valid)
-    randomForestRegressor(X_train, y_train, X_valid, y_valid)
+    #neuralNetwork(X_train, y_train, X_valid, y_valid)
+    #randomForestRegressor(X_train, y_train, X_valid, y_valid)
+	LSSVMRegressor(X_train, y_train, X_valid, y_valid)
